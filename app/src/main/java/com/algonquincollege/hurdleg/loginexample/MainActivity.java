@@ -63,6 +63,22 @@ public class MainActivity extends Activity {
                     return;
                 }
 
+                if ( userEmail.length() != 28 ) {
+                    userEmailText.setError( "Email address must be 28 characters" );
+                    userEmailText.requestFocus();
+                    return;
+                }
+
+                // VALIDATE the userEmail
+                // First position must be a lowercase letter [a-z]
+
+                if ( Character.isLowerCase(userEmail.charAt(0)) == false ) {
+                    userEmailText.setError( "The first position must be a letter [a-z]" );
+                    userEmailText.requestFocus();
+                    return;
+                }
+
+
                 // TODO for hurdleg: Validate email for Algonquin email addresses.
 
                 // TODO for hurdleg: Validate password

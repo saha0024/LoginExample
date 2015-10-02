@@ -1,7 +1,15 @@
 <resources>
     <string name="app_name">Login Example</string>
 
-    <string name="action_settings">Settings</string>
+    <!-- TODO notice how I re-named "action_settings" to "action_about"
+         Use Android Studio's refractor feature to properly rename your assets within your projects
+         Here's how to do it:
+         Select "action_setting"
+         Right-click -> Refactor -> Rename... -> action_about -> Refactor
+         Build -> Rebuild Project
+    -->
+    <string name="action_about">About</string>
+    <string name="author">Gerry Hurdle (hurdleg)</string>
     <string name="canvas">canvas</string>
     <string name="email">Email</string>
     <string name="emailHint">Your Algonquin Email</string>

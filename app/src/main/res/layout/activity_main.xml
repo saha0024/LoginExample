@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:id="@+id/passwordText"
+            android:id="@+id/userPasswordText"
             android:hint="@string/passwordHint"
             android:background="@android:drawable/editbox_background_normal" />
 
@@ -49,7 +49,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/passwordRecover"
-            android:id="@+id/forgotMyPasswordButton" />
+            android:id="@+id/forgotMyPasswordButton"
+            android:onClick="handleForgotPasswordButton" />
 
         <CheckBox
             android:layout_width="wrap_content"

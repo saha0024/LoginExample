@@ -1,6 +1,7 @@
 package com.algonquincollege.hurdleg.loginexample;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.Menu;
@@ -20,6 +21,13 @@ import android.widget.Toast;
  *  @version 1.0
  */
 public class MainActivity extends Activity {
+    // CLASS VARIABLES (by convention, class vars in upper-case)
+    private static final String ABOUT_DIALOG_TAG;
+
+    //TODO pro-tip: class vars (i.e. static vars) can be initialized within a static block initializer.
+    static {
+        ABOUT_DIALOG_TAG = "About Dialog";
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,12 +71,6 @@ public class MainActivity extends Activity {
                     return;
                 }
 
-                if ( userEmail.length() != 28 ) {
-                    userEmailText.setError( "Email address must be 28 characters" );
-                    userEmailText.requestFocus();
-                    return;
-                }
-
                 // VALIDATE the userEmail
                 // First position must be a lowercase letter [a-z]
 
@@ -78,18 +80,31 @@ public class MainActivity extends Activity {
                     return;
                 }
 
-
                 // TODO for hurdleg: Validate email for Algonquin email addresses.
 
-                // TODO for hurdleg: Validate password
+                // Reference the userPasswordText in the layout.
+                EditText userPasswordText = (EditText) findViewById( R.id.userPasswordText );
+
+                // VALIDATE the userPassword
+                // The user can only enter a whole number.
+                // TODO ALL STUDENTS
+                // Use this code in your Guess A Number (Assignment #1).
+                int password;
+                try {
+                    password = Integer.parseInt( userPasswordText.getText().toString() );
+                } catch( NumberFormatException e ) {
+                    userPasswordText.setError( "Your Password Must be a Number." );
+                    userPasswordText.requestFocus();
+                    return;
+                }
 
                 // GET whether or not the user wants to be remembered.
                 // This UI <View> is optional for the user; no input validation is required.
-                // Pro-tip: notice how I reference the CheckBox <View> ANG get its value in one line.
+                // Pro-tip: notice how I reference the CheckBox <View> AND get its value in one line.
                 boolean isRememberMe = ( (CheckBox) findViewById(R.id.isRememberMe) ).isChecked();
 
                 // SUCCESS!! All user input has been validated.
-                Toast.makeText( getApplicationContext(), "Email: " + userEmail + " remember? " + isRememberMe, Toast.LENGTH_LONG ).show();
+                Toast.makeText( getApplicationContext(), "Email: " + userEmail + " pw: " + password + " remember? " + isRememberMe, Toast.LENGTH_LONG ).show();
             }
         });
     }
@@ -108,12 +123,28 @@ public class MainActivity extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        //TODO notice how I re-named "action_settings" to "action_about"
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_about) {
+            DialogFragment newFragment = new AboutDialogFragment();
+            newFragment.show( getFragmentManager(), ABOUT_DIALOG_TAG );
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    // TODO ALL STUDENTS
+    // Perform a code inspection.
+    // Notice.... the onClick property of the "forgotMyPasswordButton" is set to: handleForgotPasswordButton
+    // This is another way to handle events in Android.
+    // To implement, the signature must be:
+    // public void <name of method>( View v )
+    //   * public access modifier
+    //   * void return type
+    //   * name of method must be identical to the onClick property
+    //   * accepts 1 parameter of type View
+    public void handleForgotPasswordButton( View v ) {
+        Toast.makeText( getApplicationContext(), "Clicked: Forgot Password Button", Toast.LENGTH_LONG).show();
+    }
 }
